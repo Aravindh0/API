@@ -1,73 +1,139 @@
 
-import csv
 import os
 import secrets
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException, Query, Security
+from fastapi import FastAPI, HTTPException, Security
+from fastapi.responses import FileResponse
 from fastapi.security import APIKeyHeader
 
 app = FastAPI(
-    title="Employee Directory API",
-    description="Custom REST API powered by a CSV file hosted with GitHub and Render.",
-    version="1.0.0"
+    title="Fabric CSV Ingestion API",
+    version="1.0.0",
+    description="API to ingest CSV files from GitHub into Fabric Lakehouse"
 )
 
-CSV_PATH = Path(__file__).parent / "employee_directory.csv"
-api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
+# --------------------------------------------------
+# API KEY AUTHENTICATION
+# --------------------------------------------------
+
+API_KEY = os.getenv("API_KEY")
+
+api_key_header = APIKeyHeader(
+    name="X-API-Key",
+    auto_error=False
+)
+
+def verify_api_key(
+    api_key: str = Security(api_key_header)
+):
+    if not API_KEY:
+        raise HTTPException(
+            status_code=500,
+            detail="API key not configured"
+        )
+
+    if not api_key or not secrets.compare_digest(
+        api_key, API_KEY
+    ):
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid API key"
+        )
+
+    return api_key
 
 
-def verify_api_key(key: str = Security(api_key_header)):
-    expected = os.environ.get("API_KEY")
-    if not expected:
-        raise HTTPException(status_code=503, detail="API key not configured")
-    if not key or not secrets.compare_digest(key, expected):
-        raise HTTPException(status_code=401, detail="Invalid API key")
+# --------------------------------------------------
+# CSV ROOT DIRECTORY
+# --------------------------------------------------
+
+# If main.py is at the repository root and your CSVs
+# are inside a folder named "Custom API", use this.
+DATA_ROOT = (
+    Path(__file__).resolve().parent / "Custom API"
+).resolve()
+
+# If CSV dataset folders are directly beside main.py,
+# replace DATA_ROOT with:
+# DATA_ROOT = Path(__file__).resolve().parent
 
 
-def load_employees():
-    if not CSV_PATH.is_file():
-        raise HTTPException(status_code=503, detail="Employee CSV not found")
-
-    with CSV_PATH.open(encoding="utf-8-sig", newline="") as file:
-        return list(csv.DictReader(file))
-
+# --------------------------------------------------
+# HEALTH CHECK
+# --------------------------------------------------
 
 @app.get("/health")
 def health():
-    return {"status": "healthy", "service": "Employee Directory API"}
+    return {
+        "status": "healthy",
+        "service": "Fabric CSV API"
+    }
 
 
-@app.get("/api/v1/employees", dependencies=[Security(verify_api_key)])
-def get_employees(
-    page: int = Query(1, ge=1),
-    pageSize: int = Query(100, ge=1, le=1000)
+# --------------------------------------------------
+# LIST ALL CSV FILES
+# --------------------------------------------------
+
+@app.get("/api/v1/files")
+def list_files(
+    api_key: str = Security(verify_api_key)
 ):
-    employees = load_employees()
-    total = len(employees)
-    start = (page - 1) * pageSize
+    files = []
+
+    for csv_file in sorted(DATA_ROOT.rglob("*.csv")):
+
+        if not csv_file.is_file():
+            continue
+
+        resolved_file = csv_file.resolve()
+
+        if not resolved_file.is_relative_to(DATA_ROOT):
+            continue
+
+        relative_path = csv_file.relative_to(DATA_ROOT)
+        parts = relative_path.parts
+
+        files.append({
+            "dataset": parts[0],
+            "dateFolder": parts[1] if len(parts) > 2 else "",
+            "fileName": csv_file.name,
+            "relativePath": relative_path.as_posix(),
+            "destinationFolder": relative_path.parent.as_posix()
+        })
 
     return {
-        "success": True,
-        "totalRecords": total,
-        "page": page,
-        "pageSize": pageSize,
-        "data": employees[start:start + pageSize]
+        "totalFiles": len(files),
+        "files": files
     }
 
 
-@app.get("/api/v1/employees/count", dependencies=[Security(verify_api_key)])
-def employee_count():
-    return {
-        "success": True,
-        "totalRecords": len(load_employees())
-    }
+# --------------------------------------------------
+# DOWNLOAD ORIGINAL CSV FILE
+# --------------------------------------------------
 
+@app.get("/api/v1/download/{file_path:path}")
+def download_csv(
+    file_path: str,
+    api_key: str = Security(verify_api_key)
+):
+    target = (DATA_ROOT / file_path).resolve()
 
-@app.get("/api/v1/employees/{employee_id}", dependencies=[Security(verify_api_key)])
-def get_employee(employee_id: str):
-    for employee in load_employees():
-        if employee.get("EmployeeID") == employee_id:
-            return {"success": True, "data": employee}
+    # Validate requested file path
+    if not target.is_relative_to(DATA_ROOT):
+        raise HTTPException(
+            status_code=403,
+            detail="Invalid file path"
+        )
 
-    raise HTTPException(status_code=404, detail="Employee not found")
+    if not target.is_file() or target.suffix.lower() != ".csv":
+        raise HTTPException(
+            status_code=404,
+            detail="CSV file not found"
+        )
+
+    return FileResponse(
+        path=target,
+        media_type="text/csv",
+        filename=target.name
+    )
