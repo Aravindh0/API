@@ -1,0 +1,9 @@
+CountryCode,CountryName,Region,CurrencyCode,TimeZone
+IT,Italy,EMEA,EUR,UTC+01:00
+NL,Netherlands,EMEA,EUR,UTC+01:00
+CA,Canada,North America,CAD,UTC-05:00
+MX,Mexico,North America,MXN,UTC-06:00
+AU,Australia,APAC,AUD,UTC+10:00
+JP,Japan,APAC,JPY,UTC+09:00
+CN,China,APAC,CNY,UTC+08:00
+SG,Singapore,APAC,SGD,UTC+08:00

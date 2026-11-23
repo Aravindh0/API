@@ -1,0 +1,19 @@
+EmployeeID,EmployeeName,Email,DepartmentID,JobTitle,HireDate,CountryCode,EmploymentType,IsActive
+133,Tom de Vries,tom.de.vries@converse.com,14,Associate,24-08-2023,NL,FTE,TRUE
+134,Nina Kapoor,nina.kapoor@converse.com,15,Associate,03-04-2018,IN,FTE,TRUE
+135,Pablo Gomez,pablo.gomez@converse.com,16,Associate,27-03-2018,AR,FTE,TRUE
+136,Zoe Nkosi,zoe.nkosi@converse.com,16,Associate,07-10-2020,ZA,Contractor,TRUE
+137,Hana Demir,hana.demir@converse.com,17,Associate,27-11-2022,TR,FTE,TRUE
+138,Karim Hassan,karim.hassan@converse.com,17,Associate,09-08-2025,EG,FTE,FALSE
+139,Lars Nilsson,lars.nilsson@converse.com,18,Associate,07-12-2021,SE,FTE,TRUE
+140,Marta Gonzalez,marta.gonzalez@converse.com,18,Associate,08-12-2018,ES,FTE,TRUE
+141,Ravi Iyer,ravi.iyer@converse.com,19,Associate,19-12-2022,IN,FTE,TRUE
+142,Elise Dubois,elise.dubois@converse.com,19,Associate,04-07-2023,FR,FTE,TRUE
+143,Henry Walker,henry.walker@converse.com,21,Manager,17-06-2018,US,FTE,TRUE
+144,Fatima Zahra,fatima.zahra@converse.com,21,Associate,25-02-2024,AE,FTE,FALSE
+145,George Evans,george.evans@converse.com,22,Manager,16-12-2022,GB,FTE,TRUE
+146,Julia Weber,julia.weber@converse.com,22,Associate,07-07-2018,DE,FTE,TRUE
+147,Kevin Tan,kevin.tan@converse.com,23,Manager,25-02-2023,SG,FTE,TRUE
+148,Laura Benedetti,laura.benedetti@converse.com,23,Associate,02-07-2019,IT,Contractor,TRUE
+149,Sam Mitchell,sam.mitchell@converse.com,24,Associate,14-09-2023,AU,FTE,TRUE
+150,Anita Desai,anita.desai@converse.com,24,Associate,26-01-2022,IN,Contractor,TRUE

@@ -1,0 +1,9 @@
+DepartmentID,DepartmentName,CostCenterID,ParentDepartmentID,HeadCount,IsActive
+9,Digital Marketing,9,2,8,TRUE
+10,Brand Marketing,10,2,7,TRUE
+11,Accounting,11,3,10,TRUE
+12,FP&A,12,3,6,TRUE
+13,Treasury,13,3,4,TRUE
+14,Infrastructure,14,4,12,TRUE
+15,Applications,15,4,14,TRUE
+16,Data & Analytics,16,4,9,TRUE

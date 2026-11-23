@@ -1,0 +1,9 @@
+CountryCode,CountryName,Region,CurrencyCode,TimeZone
+US,United States,North America,USD,UTC-05:00
+GB,United Kingdom,EMEA,GBP,UTC+00:00
+DE,Germany,EMEA,EUR,UTC+01:00
+IN,India,APAC,INR,UTC+05:30
+BR,Brazil,LATAM,BRL,UTC-03:00
+AE,United Arab Emirates,MEA,AED,UTC+04:00
+FR,France,EMEA,EUR,UTC+01:00
+ES,Spain,EMEA,EUR,UTC+01:00

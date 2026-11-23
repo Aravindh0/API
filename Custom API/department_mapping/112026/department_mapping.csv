@@ -1,0 +1,10 @@
+DepartmentID,DepartmentName,CostCenterID,ParentDepartmentID,HeadCount,IsActive
+17,Logistics,17,5,20,TRUE
+18,Warehousing,18,5,35,TRUE
+19,Procurement,19,5,11,TRUE
+20,Customer Service,20,1,22,TRUE
+21,Human Resources,21,,8,TRUE
+22,Legal,22,,5,TRUE
+23,Product Development,23,,16,TRUE
+24,Quality Assurance,24,5,9,TRUE
+25,Retail Operations,25,1,19,TRUE

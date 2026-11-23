@@ -1,0 +1,10 @@
+CountryCode,CountryName,Region,CurrencyCode,TimeZone
+ZA,South Africa,MEA,ZAR,UTC+02:00
+SA,Saudi Arabia,MEA,SAR,UTC+03:00
+KR,South Korea,APAC,KRW,UTC+09:00
+SE,Sweden,EMEA,SEK,UTC+01:00
+CH,Switzerland,EMEA,CHF,UTC+01:00
+AR,Argentina,LATAM,ARS,UTC-03:00
+NZ,New Zealand,APAC,NZD,UTC+12:00
+TR,Turkey,MEA,TRY,UTC+03:00
+EG,Egypt,MEA,EGP,UTC+02:00

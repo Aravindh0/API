@@ -1,0 +1,17 @@
+EmployeeID,EmployeeName,Email,DepartmentID,JobTitle,HireDate,CountryCode,EmploymentType,IsActive
+117,Noah Williams,noah.williams@converse.com,8,Associate,30-04-2020,US,FTE,TRUE
+118,Chloe Tremblay,chloe.tremblay@converse.com,25,Manager,17-05-2022,CA,FTE,TRUE
+119,Mateo Fernandez,mateo.fernandez@converse.com,25,Associate,19-02-2020,MX,FTE,TRUE
+120,Yuki Tanaka,yuki.tanaka@converse.com,6,Associate,05-11-2019,JP,FTE,TRUE
+121,Wei Zhang,wei.zhang@converse.com,7,Manager,30-06-2024,CN,FTE,TRUE
+122,Priya Nair,priya.nair@converse.com,20,Associate,28-04-2020,IN,FTE,TRUE
+123,Omar Haddad,omar.haddad@converse.com,20,Associate,16-08-2020,AE,FTE,TRUE
+124,Isabella Rossi,isabella.rossi@converse.com,20,Associate,01-12-2021,IT,FTE,TRUE
+125,Lucas Silva,lucas.silva@converse.com,20,Associate,27-09-2023,BR,FTE,TRUE
+126,Emma Johansson,emma.johansson@converse.com,20,Associate,02-08-2025,SE,FTE,TRUE
+127,Jacob Muller,jacob.muller@converse.com,20,Associate,21-06-2024,CH,FTE,TRUE
+128,Olivia Brown,olivia.brown@converse.com,9,Associate,30-03-2023,AU,FTE,TRUE
+129,Ethan Clarke,ethan.clarke@converse.com,10,Associate,03-09-2018,NZ,Contractor,TRUE
+130,Ava Martin,ava.martin@converse.com,11,Associate,20-11-2020,US,FTE,TRUE
+131,Daniel Park,daniel.park@converse.com,12,Associate,11-07-2025,KR,FTE,TRUE
+132,Sara Al-Farsi,sara.al-farsi@converse.com,13,Associate,28-02-2025,SA,FTE,TRUE
